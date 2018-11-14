@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 
+    Route::auth();
+
     $user = App\User::find(1);
 
     foreach ($user->tasks as $task) {
