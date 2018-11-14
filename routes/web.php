@@ -13,4 +13,10 @@
 
 Route::get('/', function () {
     return view('welcome');
+
+    $user = App\User::find(1);
+
+    foreach ($user->tasks as $task) {
+        echo $task->name;
+    }
 });
