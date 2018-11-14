@@ -13,12 +13,16 @@
 
 Route::get('/', function () {
     return view('welcome');
-
-    Route::auth();
-
-    $user = App\User::find(1);
-
-    foreach ($user->tasks as $task) {
-        echo $task->name;
-    }
 });
+
+Route::get('/home', function () {
+    return view('home.home');
+});
+
+Route::auth();
+
+$user = App\User::find(1);
+
+foreach ($user->tasks as $task) {
+    echo $task->name;
+}
