@@ -21,8 +21,6 @@ Route::get('/home', function () {
 
 Route::auth();
 
-$user = App\User::find(1);
-
-foreach ($user->tasks as $task) {
-    echo $task->name;
-}
+Route::get('/tasks', 'TaskController@index');
+Route::post('/task', 'TaskController@store');
+Route::delete('/task/{task}', 'TaskController@destroy');
