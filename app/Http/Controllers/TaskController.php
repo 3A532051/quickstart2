@@ -1,14 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Repositories\TaskRepository;
 use App\Task;
-
 class TaskController extends Controller
 {
+    /**
+     * 建立一個新的控制器實例。
+     *
+     * @return void
+     */
     /**
      * 任務資源庫的實例。
      *
@@ -24,9 +26,8 @@ class TaskController extends Controller
     public function __construct(TaskRepository $tasks)
     {
         $this->middleware('auth');
-        $this->tasks = $tasks;
+        //$this->tasks = $tasks;  //TaskRepository作用何在???????
     }
-
     /**
      * 顯示使用者所有任務的清單。
      *
@@ -35,9 +36,13 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        return view('tasks.index');
+        $tasks = Task::where('user_id', $request->user()->id)->get();
+//        $user=User::where('id', $request->user()->id);
+//        $tasks=$this->tasks->forUser($user);
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
     }
-
     /**
      * 建立新的任務。
      *
@@ -54,7 +59,6 @@ class TaskController extends Controller
         ]);
         return redirect('/tasks');
     }
-
     /**
      * 移除給定的任務。
      *
