@@ -3,18 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Repositories\TaskRepository;
+use App\Task;
 
 class TaskController extends Controller
 {
     /**
-     * 建立一個新的控制器實例。
+     * 任務資源庫的實例。
      *
+     * @var TaskRepository
+     */
+    protected $tasks;
+    /**
+     * 建立新的控制器實例。
+     *
+     * @param  TaskRepository  $tasks
      * @return void
      */
-    public function __construct()
+    public function __construct(TaskRepository $tasks)
     {
         $this->middleware('auth');
+        $this->tasks = $tasks;
     }
 
     /**
