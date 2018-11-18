@@ -56,7 +56,7 @@
                                 <div>{{ $task->name }}</div>
                             </td>
 
-                            <!-- 刪除按鈕 -->
+                            <!-- 顯示刪除按鈕 -->
                             <td>
                                 <form action="/task/{{ $task->id }}" method="POST">
                                     {{ csrf_field() }}
